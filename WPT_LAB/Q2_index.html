@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Styling</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <label for="textInput">Enter Text:</label>
+    <input type="text" id="textInput" />
+
+    <label for="styleSelect">Select Style:</label>
+    <select id="styleSelect">
+      <option value="none">None</option>
+      <option value="B">Bold</option>
+      <option value="I">Italic</option>
+      <option value="U">Underline</option>
+      <option value="BIU">Bold Italic Underline</option>
+    </select>
+
+    <p id="output"></p>
+
+    <script>
+      $(document).ready(function () {
+        $("#styleSelect").change(function () {
+          var selectedStyle = $(this).val();
+          var inputText = $("#textInput").val();
+          var styledText = "";
+
+          switch (selectedStyle) {
+            case "B":
+              styledText = "<b>" + inputText + "</b>";
+              break;
+            case "I":
+              styledText = "<i>" + inputText + "</i>";
+              break;
+            case "U":
+              styledText = "<u>" + inputText + "</u>";
+              break;
+            case "BIU":
+              styledText = "<b><i><u>" + inputText + "</u></i></b>";
+              break;
+            default:
+              styledText = inputText;
+          }
+
+          $("#output").html(styledText);
+        });
+      });
+    </script>
+  </body>
+</html>

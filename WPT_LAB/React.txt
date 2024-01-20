@@ -1,0 +1,79 @@
+//============Compnent1=============
+
+import React, { useState } from 'react';
+
+const Component1 = ({ onSelectCity }) => {
+  const cities = ['New York', 'London', 'Paris', 'Tokyo', 'Sydney'];
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const handleCityChange = (event) => {
+    const city = event.target.value;
+    setSelectedCity(city);
+    onSelectCity(city);
+  };
+
+  return (
+    <div>
+      <label>Select a city:</label>
+      <select onChange={handleCityChange} value={selectedCity}>
+        <option value="">Select a city</option>
+        {cities.map((city) => (
+          <option key={city} value={city}>
+            {city}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+export default Component1;
+
+
+//==================Component2==========================
+
+import React from 'react';
+
+const Component2 = ({ selectedCity }) => {
+  const reversedCity = selectedCity.split('').reverse().join('');
+
+  return (
+    <div style={{ color: 'red' }}>
+      {selectedCity ? (
+        <>
+          <p>Selected City: {selectedCity}</p>
+          <p>Reversed City: {reversedCity}</p>
+        </>
+      ) : (
+        <p>No city selected</p>
+      )}
+    </div>
+  );
+};
+
+export default Component2;
+
+
+
+// ======================== App.js ======================
+
+import React, { useState } from 'react';
+import Component1 from './Component1';
+import Component2 from './Component2';
+
+const App = () => {
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const handleSelectCity = (city) => {
+    setSelectedCity(city);
+  };
+
+  return (
+    <div>
+      <Component1 onSelectCity={handleSelectCity} />
+      <Component2 selectedCity={selectedCity} />
+    </div>
+  );
+};
+
+export default App;
